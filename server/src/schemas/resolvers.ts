@@ -10,10 +10,11 @@ const resolvers = {
       // Create the me query
       if (!context.user) {
         // If there is no user context
-        throw new Error("Not authenticated"); // Throw an authentication error
+        throw new Error("Not authenticated, There is no user context."); // Throw an authentication error
       }
       const user = await User.findById(context.user._id).populate("savedBooks"); // Find the user by id and populate the savedBooks field
       if (!user) {
+        // If the user is not found
         throw new Error("User not found");
       }
 
@@ -30,7 +31,7 @@ const resolvers = {
     addUser: async (_: any, { username, email, password }: any) => {
       // Create the createUser mutation
       const user = await User.create({ username, email, password }); // Create a new user
-      const token = signToken(user.username, user.password, user._id); // Sign a token
+      const token = signToken(user.username, user.email, user._id); // Sign a token
       return { token, user }; // Return the token and user
     },
 
@@ -49,7 +50,7 @@ const resolvers = {
         throw new Error("Wrong password!"); // Throw an authentication error
       }
 
-      const token = signToken(user.username, user.password, user._id); // Sign a token
+      const token = signToken(user.username, user.email, user._id); // Sign a token
       return { token, user }; // Return the token and user
     },
 
@@ -58,7 +59,7 @@ const resolvers = {
       // Create the saveBook mutation
       if (!context.user) {
         // If there is no user context
-        throw new Error("Not authenticated"); // Throw an authentication error
+        throw new Error("Not authenticated, There is no user context."); // Throw an authentication error
       }
 
       const updatedUser = await User.findByIdAndUpdate(

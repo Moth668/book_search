@@ -1,30 +1,51 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
+import React, { useState } from "react"; // Import React and useState hook
+import { useMutation } from "@apollo/client"; // Import useMutation hook from Apollo Client
+import { LOGIN_USER } from "../utils/mutations"; // Import LOGIN_USER mutation
 
 function LoginForm() {
-  const [loginUser] = useMutation(LOGIN_USER);
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  // Define LoginForm component
+  const [loginUser] = useMutation(LOGIN_USER); // Destructure the loginUser mutation function from the useMutation hook
+  const [formState, setFormState] = useState({ email: "", password: "" }); // Define formState and setFormState with useState
 
   const handleFormSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
+    // Define handleFormSubmit function
+    event.preventDefault(); // Prevent default form behavior
     try {
+      // Try to execute the following code block
       const { data } = await loginUser({
-        variables: { ...formState },
-      });
-      console.log(data);
+        // Destructure the data object from the loginUser mutation
+        variables: { ...formState }, // Pass the formState object as variables to the loginUser mutation
+      }); // Call the loginUser mutation
+      console.log(data); // Log the data object to the console
     } catch (err) {
-      console.error(err);
-    }
-  };
+      // Catch any errors and execute the following code block
+      console.error(err); // Log the error to the console
+    } // End of try...catch block
+  }; // End of handleFormSubmit function
 
   return (
+    // Return the following JSX
     <form onSubmit={handleFormSubmit}>
-      <input name="email" placeholder="Email" onChange={(e) => setFormState({ ...formState, email: e.target.value })} />
-      <input name="password" placeholder="Password" type="password" onChange={(e) => setFormState({ ...formState, password: e.target.value })} />
-      <button type="submit">Log In</button>
-    </form>
-  );
-}
+      {" "}
+      {/* Render a form with an onSubmit event handler */}
+      <input
+        name="email"
+        placeholder="Email"
+        onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+      />{" "}
+      {/* Render an input field for the email with an onChange event handler */}
+      <input
+        name="password"
+        placeholder="Password"
+        type="password"
+        onChange={(e) =>
+          setFormState({ ...formState, password: e.target.value })
+        }
+      />{" "}
+      {/* Render an input field for the password with an onChange event handler */}
+      <button type="submit">Log In</button> {/* Render a submit button */}
+    </form> // End of form
+  ); // End of return statement
+} // End of LoginForm component
 
-export default LoginForm;
+export default LoginForm; // Export LoginForm component

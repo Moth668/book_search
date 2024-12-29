@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import { typeDefs, resolvers } from './schemas/index.js';
 import { authenticateToken } from './services/auth.js';
 import db from './config/connection.js';
+import { EventEmitter } from 'events';
 import { fileURLToPath } from 'url';
 
 const app = express();
@@ -46,8 +47,7 @@ const startApolloServer = async () => {
   app.get('*', (_req, res) => {
     res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
   });
-
-  db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+  (db as unknown as EventEmitter).on('error', console.error.bind(console, 'MongoDB connection error:'));
 
   const PORT = process.env.PORT || 3001;
   app.listen(PORT, () => {
