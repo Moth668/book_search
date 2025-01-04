@@ -1,3 +1,5 @@
+// * `server.ts`: Implement the Apollo Server and apply it to the Express server as middleware.
+
 import express from 'express';
 import path from 'path';
 import { ApolloServer } from '@apollo/server';

@@ -1,3 +1,5 @@
+// * `App.tsx`: Create an Apollo Provider to make every request work with the Apollo Server.
+
 import React from 'react';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
