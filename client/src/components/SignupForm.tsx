@@ -1,3 +1,5 @@
+// * `SignupForm.tsx`: Replace the `addUser()` functionality imported from the `API` file with the `ADD_USER` mutation functionality.
+
 import React, { useState } from "react"; // Import React and useState hook
 import { useMutation } from "@apollo/client"; // Import useMutation hook from Apollo Client
 import { ADD_USER } from "../utils/mutations"; // Import ADD_USER mutation

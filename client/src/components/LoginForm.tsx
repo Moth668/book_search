@@ -1,3 +1,5 @@
+// * `LoginForm.tsx`: Replace the `loginUser()` functionality imported from the `API` file with the `LOGIN_USER` mutation functionality.
+
 import React, { useState } from "react"; // Import React and useState hook
 import { useMutation } from "@apollo/client"; // Import useMutation hook from Apollo Client
 import { LOGIN_USER } from "../utils/mutations"; // Import LOGIN_USER mutation

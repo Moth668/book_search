@@ -1,3 +1,7 @@
+// * `resolvers.ts`: Define the query and mutation functionality to work with the Mongoose models.
+
+// **Hint**: Use the functionality in the `user-controller.ts` as a guide.
+
 import User from "../models/User.js"; // Import user model
 import { signToken } from "../services/auth.js"; // Import token service
 
