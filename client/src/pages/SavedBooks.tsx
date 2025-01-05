@@ -1,4 +1,3 @@
-import React from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
@@ -23,12 +22,16 @@ function SavedBooks() {
 
   return (
     <div>
-      {userData.savedBooks.map((book: any) => (
-        <div key={book.bookId}>
-          <p>{book.title}</p>
-          <button onClick={() => handleDeleteBook(book.bookId)}>Delete</button>
-        </div>
-      ))}
+      {userData.savedBooks && userData.savedBooks.length > 0 ? (
+        userData.savedBooks.map((book: any) => (
+          <div key={book.bookId}>
+            <p>{book.title}</p>
+            <button onClick={() => handleDeleteBook(book.bookId)}>Delete</button>
+          </div>
+        ))
+      ) : (
+        <p>No saved books.</p>
+      )}
     </div>
   );
 }

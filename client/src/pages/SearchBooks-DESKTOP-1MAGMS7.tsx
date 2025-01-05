@@ -1,4 +1,10 @@
-import { useState } from 'react';
+// * `SearchBooks.tsx`:
+
+//   * Use the Apollo `useMutation()` hook to execute the `SAVE_BOOK` mutation in the `handleSaveBook()` function instead of the `saveBook()` function imported from the `API` file.
+
+//   * Make sure you keep the logic for saving the book's ID to state in the `try...catch` block!
+
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
 
@@ -8,7 +14,7 @@ function SearchBooks() {
 
   const handleSaveBook = async (book: any) => {
     try {
-      await saveBook({
+      const { data } = await saveBook({
         variables: { book },
       });
       setSavedBookIds([...savedBookIds, book.bookId]);
@@ -20,9 +26,6 @@ function SearchBooks() {
   return (
     <div>
       {/* Add your UI code for search results */}
-      <button onClick={() => handleSaveBook({ bookId: '1', title: 'Sample Book' })}>
-        Save Book
-      </button>
       {/* Call handleSaveBook(book) when the user clicks save */}
     </div>
   );

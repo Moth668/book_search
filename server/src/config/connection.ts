@@ -1,4 +1,6 @@
 import mongoose from "mongoose"; // Import mongoose
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/googlebooks");

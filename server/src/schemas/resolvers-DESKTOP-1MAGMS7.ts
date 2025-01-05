@@ -1,3 +1,7 @@
+// * `resolvers.ts`: Define the query and mutation functionality to work with the Mongoose models.
+
+// **Hint**: Use the functionality in the `user-controller.ts` as a guide.
+
 import User from "../models/User.js"; // Import user model
 import { signToken } from "../services/auth.js"; // Import token service
 
@@ -38,9 +42,7 @@ const resolvers = {
     // Login an existing user
     login: async (_: any, { email, password }: any) => {
       // Create the login mutation
-      console.log(email, password);
       const user = await User.findOne({ email }); // Find the user by email
-      console.log(user);
       if (!user) {
         // If the user is not found
         throw new Error("Can't find this user"); // Throw an authentication error

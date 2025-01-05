@@ -1,4 +1,4 @@
- const typeDefs = ` 
+const typeDefs = ` 
     type Query {
     me: User
     }
@@ -14,8 +14,8 @@
     _id: ID
     username: String
     email: String
-    bookCount: Int
     savedBooks: [Book]
+    password: String
     }
     
     type Book {
@@ -30,7 +30,6 @@
     type Auth {
     token: ID!
     user: User
-    }`;  // Define the typeDefs
+    }`; // Define the typeDefs
 
-    export default typeDefs; // Export the typeDefs
-
+export default typeDefs; // Export the typeDefs

@@ -1,58 +1,43 @@
-import express from 'express';
-import path from 'path';
-import { ApolloServer } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
-import bodyParser from 'body-parser';
-import { typeDefs, resolvers } from './schemas/index.js';
-import { authenticateToken } from './services/auth.js';
-import db from './config/connection.js';
-import { EventEmitter } from 'events';
-import { fileURLToPath } from 'url';
+// * `server.ts`: Implement the Apollo Server and apply it to the Express server as middleware.
+import { authenticateToken } from "./services/auth.js";
+import express from "express";
+import db from "./config/connection.js";
 
-const app = express();
+// Import the ApolloServer class
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/express4";
 
-// Simulate __dirname in ES module
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Import the two parts of a GraphQL schema
+import { typeDefs, resolvers } from "./schemas/index.js";
 
-// Serve static files from client/dist
-app.use(express.static(path.join(__dirname, '../../client/dist')));
-
-// Apollo Server setup
 const server = new ApolloServer({
   typeDefs,
   resolvers,
 });
 
+// Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
   await server.start();
+  await db;
 
-  app.use(express.urlencoded({ extended: true }));
+  const PORT = process.env.PORT || 3001;
+  const app = express();
+
+  app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
-  // Apply Apollo middleware
   app.use(
-    '/graphql',
-    bodyParser.json(),
-    expressMiddleware(server, {
-      context: async ({ req }) => {
-        const authHeader = req.headers.authorization;
-        const user = authHeader ? authenticateToken(authHeader) : null;
-        return { user };
-      },
+    "/graphql",
+    expressMiddleware(server as any, {
+      context: authenticateToken as any,
     })
   );
 
-  // Fallback route to serve index.html for SPA
-  app.get('*', (_req, res) => {
-    res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
-  });
-  (db as unknown as EventEmitter).on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-  const PORT = process.env.PORT || 3001;
   app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}/graphql`);
+    console.log(`API server running on port ${PORT}!`);
+    console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
   });
 };
 
+// Call the async function to start the server
 startApolloServer();
