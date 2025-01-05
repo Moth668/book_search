@@ -41,4 +41,4 @@ export const signToken = (username: string, email: string, _id: unknown) => {
   const secretKey = process.env.JWT_SECRET_KEY || "";
 
   return jwt.sign(payload, secretKey, { expiresIn: "1h" });
-
+};
