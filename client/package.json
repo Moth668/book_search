@@ -6,10 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
+    "graphql": "^16.6.0",
+    "@apollo/client": "^3.7.14",
     "bootstrap": "^5.2.3",
     "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
