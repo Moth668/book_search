@@ -1,25 +1,23 @@
 // * `App.tsx`: Create an Apollo Provider to make every request work with the Apollo Server.
 
-import React from 'react';
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import SearchBooks from './pages/SearchBooks';
-import SavedBooks from './pages/SavedBooks';
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+
+import { Outlet } from "react-router-dom";
 
 const client = new ApolloClient({
-  uri: '/graphql', // Adjust the URI if necessary
+  uri: "/graphql",
   cache: new InMemoryCache(),
 });
+
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<SearchBooks />} />
-          <Route path="/saved" element={<SavedBooks />} />
-        </Routes>
-      </Router>
+      <>
+        <Navbar />
+        <Outlet />
+      </>
     </ApolloProvider>
   );
 }

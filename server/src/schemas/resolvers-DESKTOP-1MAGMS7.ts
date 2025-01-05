@@ -42,9 +42,7 @@ const resolvers = {
     // Login an existing user
     login: async (_: any, { email, password }: any) => {
       // Create the login mutation
-      console.log(email, password);
       const user = await User.findOne({ email }); // Find the user by email
-      console.log(user);
       if (!user) {
         // If the user is not found
         throw new Error("Can't find this user"); // Throw an authentication error

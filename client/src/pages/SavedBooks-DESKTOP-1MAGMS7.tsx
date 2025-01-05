@@ -6,6 +6,7 @@
 
 //   * Use the `useMutation()` hook to execute the `REMOVE_BOOK` mutation in the `handleDeleteBook()` function instead of the `deleteBook()` function that's imported from the `API` file. (Make sure you keep the `removeBookId()` function in place!)
 
+import React from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
@@ -30,16 +31,12 @@ function SavedBooks() {
 
   return (
     <div>
-      {userData.savedBooks && userData.savedBooks.length > 0 ? (
-        userData.savedBooks.map((book: any) => (
-          <div key={book.bookId}>
-            <p>{book.title}</p>
-            <button onClick={() => handleDeleteBook(book.bookId)}>Delete</button>
-          </div>
-        ))
-      ) : (
-        <p>No saved books.</p>
-      )}
+      {userData.savedBooks.map((book: any) => (
+        <div key={book.bookId}>
+          <p>{book.title}</p>
+          <button onClick={() => handleDeleteBook(book.bookId)}>Delete</button>
+        </div>
+      ))}
     </div>
   );
 }
