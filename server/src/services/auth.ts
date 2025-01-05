@@ -1,5 +1,4 @@
 // * `auth.ts`: Update the auth middleware function to work with the GraphQL API.
-
 import jwt from "jsonwebtoken";
 
 import dotenv from "dotenv";
@@ -38,7 +37,8 @@ export const authenticateToken = ({ req }: any) => {
 
 export const signToken = (username: string, email: string, _id: unknown) => {
   const payload = { username, email, _id };
+
   const secretKey = process.env.JWT_SECRET_KEY || "";
 
   return jwt.sign(payload, secretKey, { expiresIn: "1h" });
-};
+
