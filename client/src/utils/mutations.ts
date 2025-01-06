@@ -8,8 +8,7 @@
 
 //   * `REMOVE_BOOK` will execute the `removeBook` mutation.
 
-import { gql } from '@apollo/client';
-
+import { gql } from "@apollo/client";
 
 export const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
@@ -38,8 +37,20 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_BOOK = gql`
-  mutation saveBook($book: BookInput!) {
-    saveBook(book: $book) {
+  mutation saveBook(
+    $authors: [String!]
+    $description: String!
+    $title: String!
+    $bookId: String!
+    $image: String!
+  ) {
+    saveBook(
+      authors: $authors
+      description: $description
+      title: $title
+      bookId: $bookId
+      image: $image
+    ) {
       _id
       username
       email
@@ -49,7 +60,6 @@ export const SAVE_BOOK = gql`
         description
         title
         image
-        link
       }
     }
   }
