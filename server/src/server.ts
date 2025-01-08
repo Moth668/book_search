@@ -4,7 +4,8 @@ import express from "express";
 import path from "node:path";
 import type { Request, Response } from "express";
 import db from "./config/connection.js";
-// import router from "./routes/index.js";
+
+const __dirname = path.resolve();
 
 // Import the ApolloServer class
 import { ApolloServer } from "@apollo/server";
@@ -42,6 +43,8 @@ const startApolloServer = async () => {
     app.get("*", (_req: Request, res: Response) => {
       res.sendFile(path.join(__dirname, "../client/dist/index.html"));
     });
+
+    console.log(__dirname);
   }
 
   app.listen(PORT, () => {
