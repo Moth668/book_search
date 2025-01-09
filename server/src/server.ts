@@ -5,6 +5,7 @@ import path from "node:path";
 import type { Request, Response } from "express";
 import db from "./config/connection.js";
 
+
 const __dirname = path.resolve();
 
 // Import the ApolloServer class
