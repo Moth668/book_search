@@ -7,7 +7,7 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "skipLibCheck": true,
-    "typeRoots": ["./node_modules/@types", "./src/types"],
+    // "typeRoots": ["./node_modules/@types", "./src/types"],
 
     /* JavaScript Support */
     "allowJs": true,
@@ -32,9 +32,9 @@
     "outDir": "./dist" /* Ensures compiled files are written to dist */,
     "rootDir": "./src" /* Ensures TypeScript only compiles files from src */
   },
-  "include": ["src/**/*.tsx"] /* Includes all files in the src directory */,
+
   "exclude": [
-    "dist",
-    "node_modules"
+    "./server/dist",
+    "./server/node_modules", "./client/dist", "./client/node_modules"
   ] /* Excludes the dist and node_modules directories */
 }
