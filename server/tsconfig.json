@@ -5,6 +5,8 @@
     "outDir": "dist", // Compiled files
     "noEmitOnError": true // Prevent emitting files on TypeScript errors
   },
-  "include": ["src/**/*.tsx"], // Include all TSX files in the src directory
-  "exclude": ["dist", "node_modules"] // Explicitly exclude dist and node_modules
+  "include": ["src"], // Include all files in the src directory
+  "exclude": ["dist", "node_modules"], // Explicitly exclude dist and node_modules
+
+  "typeRoots": ["./node_modules/@types", "./src/types"]
 }
