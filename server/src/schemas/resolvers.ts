@@ -61,13 +61,13 @@ const resolvers = {
     },
 
     // Save a book to the user's savedBooks field
-    saveBook: async (_: any, { book }: any, context: any) => {
+    saveBook: async (_: any, book: any, context: any) => {
       // Create the saveBook mutation
       if (!context.user) {
         // If there is no user context
         throw new Error("Not authenticated, There is no user context."); // Throw an authentication error
       }
-
+      console.log(book);
       const updatedUser = await User.findByIdAndUpdate(
         // Find a user and update
         context.user._id, // By id
